@@ -6,6 +6,9 @@ import org.springframework.web.client.RestOperations;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.IOException;
+import java.net.URL;
+
 @Component
 public class MovieDataServiceImpl implements MovieDataService {
 	public static final String MOVIE_DATA_URL
@@ -24,6 +27,14 @@ public class MovieDataServiceImpl implements MovieDataService {
 		// Please noted that you must only read data remotely and only from given source,
 		// do not download and use local file or put the file anywhere else.
 
+		MoviesResponse moviesResponse = new MoviesResponse();
+
+		try {
+			moviesResponse =  objectMapper.readValue(new URL(MOVIE_DATA_URL), MoviesResponse.class);
+			return moviesResponse;
+		} catch (IOException e){
+			e.printStackTrace();
+		}
 		return null;
 	}
 }

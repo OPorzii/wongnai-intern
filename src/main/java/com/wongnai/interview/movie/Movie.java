@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @Entity
 public class Movie {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	private String name;
@@ -24,7 +24,7 @@ public class Movie {
 	/**
 	 * Required by JPA.
 	 */
-	protected Movie() {
+	public Movie() {
 	}
 
 	public Movie(String name) {
@@ -37,6 +37,10 @@ public class Movie {
 
 	public String getName() {
 		return name;
+	}
+
+	public void setActors(List<String> actors) {
+		this.actors = actors;
 	}
 
 	public void setName(String name) {

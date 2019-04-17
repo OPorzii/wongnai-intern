@@ -53,6 +53,13 @@ public class InvertedIndexMovieSearchServiceIntegrationTest {
 	}
 
 	@Test
+	public void testPartialMidleWordMustNotMatch() {
+		List<Movie> result = searchService.search("Star xx");
+
+		Assert.assertThat(result.size(), Matchers.equalTo(0));
+	}
+
+	@Test
 	public void testFullMovieNameMustMatchMovie() {
 		List<Movie> result = searchService.search("The Glorious Lady");
 

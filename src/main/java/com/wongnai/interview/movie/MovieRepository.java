@@ -1,5 +1,6 @@
 package com.wongnai.interview.movie;
 
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
@@ -24,4 +25,6 @@ public interface MovieRepository extends CrudRepository<Movie, Long> {
 	 */
 	@Query("SELECT m FROM Movie m where lower(m.name) LIKE lower(CONCAT('%',:keyword,'%'))")
 	List<Movie> findByNameContains(@Param("keyword") String keyword);
+
+	List<Movie> findByIdIsIn(HashSet<Long> id);
 }
